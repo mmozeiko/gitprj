@@ -1,0 +1,8 @@
+.vs
+*.exe
+*.exp
+*.lib
+*.obj
+*.pdb
+libgit2
+tags

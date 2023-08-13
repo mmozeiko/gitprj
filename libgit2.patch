@@ -1,0 +1,26 @@
+diff --git cmake/DefaultCFlags.cmake cmake/DefaultCFlags.cmake
+index a9c9ab9..5f44f31 100644
+--- cmake/DefaultCFlags.cmake
++++ cmake/DefaultCFlags.cmake
+@@ -47,7 +47,7 @@ if(MSVC)
+ 	# /Oy - Enable frame pointer omission (FPO) (otherwise CMake will automatically turn it off)
+ 	# /GL - Link time code generation (whole program optimization)
+ 	# /Gy - Function-level linking
+-	set(CMAKE_C_FLAGS_RELEASE "/DNDEBUG /O2 /Oy /GL /Gy ${CRT_FLAG_RELEASE}")
++	set(CMAKE_C_FLAGS_RELEASE "/DNDEBUG /O2 /Oy /Gy ${CRT_FLAG_RELEASE}")
+ 
+ 	# /Oy- - Disable frame pointer omission (FPO)
+ 	set(CMAKE_C_FLAGS_RELWITHDEBINFO "/DNDEBUG /Zi /O2 /Oy- /GL /Gy ${CRT_FLAG_RELEASE}")
+diff --git include/git2/common.h include/git2/common.h
+index ab6bc13..d3e908d 100644
+--- include/git2/common.h
++++ include/git2/common.h
+@@ -40,7 +40,7 @@ typedef size_t size_t;
+ 			 __attribute__((visibility("default"))) \
+ 			 type
+ #elif defined(_MSC_VER)
+-# define GIT_EXTERN(type) __declspec(dllexport) type __cdecl
++# define GIT_EXTERN(type) type __cdecl
+ #else
+ # define GIT_EXTERN(type) extern type
+ #endif
