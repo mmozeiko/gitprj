@@ -52,7 +52,7 @@ typedef struct DirEnum {
 typedef struct {
 	git_repository* repo;
 	DirEnum enums;
-	volatile LONG enumLock;
+	LONG enumLock;
 } State;
 
 static int DirEntrySort(const void* a, const void* b)
@@ -175,6 +175,7 @@ static void StateLock(State* state)
 static void StateUnlock(State* state)
 {
 	InterlockedExchange(&state->enumLock, 0);
+	WakeByAddressSingle(&state->enumLock);
 }
 
 // split path on first '\\'
